@@ -9,7 +9,6 @@ function RacesList(){
     return race_summaries &&
         next_to_go_ids
             .filter((raceId) => {
-                console.log(race_summaries[raceId].advertised_start.seconds - date.getTime()/1000)
                 return ((date.getTime() - 60000 )/ 1000) < race_summaries[raceId].advertised_start.seconds
             })
             .slice(0, 5)

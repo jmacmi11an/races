@@ -1,6 +1,6 @@
 function RaceItem({meetingName, raceNumber, startingTime}){
     const minutes = Math.floor(startingTime/60)
-    const seconds = startingTime - (minutes * 60);
+    const seconds = (startingTime - (minutes * 60)).toLocaleString('en-US', {minimumIntegerDigits: 2});
    
     return (
         <div>
