@@ -1,23 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useContext } from 'react';
+import RacesList from './components/RacesList';
+import RacesContext from './context/races';
 
 function App() {
+  const { fetchRaces, date } = useContext(RacesContext);
+
+  useEffect(() => {
+    fetchRaces()
+  }, [fetchRaces]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Next Five Races</h1>
+      <h3>Countdown clock: {date.toLocaleTimeString()}</h3>
+      <RacesList />
     </div>
   );
 }
