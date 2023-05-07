@@ -12,7 +12,7 @@ function App() {
   return (
     <div>
       <h1>Next Five Races</h1>
-      <h3>Countdown clock: {date.toLocaleTimeString()}</h3>
+      <h3>{date.toLocaleTimeString()}</h3>
       <RacesList />
     </div>
   );
