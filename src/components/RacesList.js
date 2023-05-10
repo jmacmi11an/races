@@ -32,7 +32,7 @@ function RacesList({raceType}){
             .slice(0, 5)
             .map((raceId) => {
                 const race = race_summaries[raceId];
-                const { meeting_name, race_number, advertised_start, category_id } = race;
+                const { meeting_name, race_number, advertised_start } = race;
                 return ( 
                     <RaceItem 
                         key={raceId} 

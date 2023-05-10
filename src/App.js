@@ -11,10 +11,7 @@ function App() {
     fetchRaces()
   }, [fetchRaces]);
 
-  const handleSelect = (value) => {
-    console.log('running')
-    setRaceType(value)
-  };
+  const handleSelect = (value) => setRaceType(value);
 
   return (
     <div>
