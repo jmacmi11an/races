@@ -11,14 +11,18 @@ function Provider({ children }) {
 
     useEffect(() => {
         const timerId = setInterval(refreshTime, 1000);
-        return function cleanup() {
+        return () => {
         clearInterval(timerId);
         };
     }, []);
 
     const fetchRaces = async () => {
-        const response = await axios.get("https://api.neds.com.au/rest/v1/racing/?method=nextraces&count=10")
-        setRaces(response.data.data);
+        try {
+            const response = await axios.get("https://api.neds.com.au/rest/v1/racing/?method=nextraces&count=10");
+            setRaces(response.data.data);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     const valuesToShare = {
