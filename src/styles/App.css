@@ -1,0 +1,27 @@
+body {
+    color: #f6f6f6;
+    background-color: rgb(20, 20, 20);
+    margin: 0;
+    font-family: 'Work Sans', sans-serif;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: rgb(35, 37, 44);
+    color: #b6b6b6;
+}
+
+.title {
+    text-transform: uppercase;
+    text-align: center;
+    background-color: rgb(63, 53, 53);
+    padding: 2rem;
+    color: rgb(229, 230, 224);
+    font-size: xxx-large;
+    margin: 0;
+}
+
+.countdown {
+    text-align: center;
+}

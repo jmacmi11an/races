@@ -1,0 +1,11 @@
+.dropdown {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.dropdown-select {
+    padding: 6px;
+    border: 1px solid black;
+    border-radius: 6px;
+    width: 30%;
+}

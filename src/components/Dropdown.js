@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "../styles/Dropdown.css";
 
 function Dropdown({onChange, raceType}) {
     const [value, setValue] = useState('');
@@ -8,8 +9,9 @@ function Dropdown({onChange, raceType}) {
         onChange(event.target.value);
     };
 
-    return <div>
-        <select value={value} onChange={handleChange}>
+    return <div className="dropdown">
+        <h3>Select race type</h3>
+        <select className="dropdown-select" value={value} onChange={handleChange}>
             <option value="all">All</option>
             <option value="greyhound">Greyhound</option>
             <option value="harness">Harness</option>

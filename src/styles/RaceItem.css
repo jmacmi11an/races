@@ -1,0 +1,33 @@
+.race-item {
+    background-color: rgb(237, 245, 255);
+    max-width: 80%;
+    border: 1px solid black;
+    margin: 10px auto;
+    border-radius: 20px;
+    padding: 1rem;
+    color:rgb(35, 37, 44);
+
+}
+
+.race-item-title {
+    margin: 0;
+}
+
+.pulse {
+    animation: blink 2s linear infinite;
+}
+
+@keyframes blink {
+    0% {
+      opacity: .5;
+      color: red;
+    }
+    50% {
+      opacity: 1;
+      color: red;
+    }
+    100% {
+      opacity: .5;
+      color: red;
+    }
+}
