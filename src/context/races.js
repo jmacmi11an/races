@@ -5,9 +5,11 @@ const RacesContext = createContext();
 
 function Provider({ children }) {
     const [races, setRaces] = useState([]);
+    const [refetch, setRefetch] = useState(false);
     const [date, setDate] = useState(new Date());
 
     const refreshTime = () => setDate(new Date());
+    const refetchRaces = () => setRefetch(true);
 
     useEffect(() => {
         const timerId = setInterval(refreshTime, 1000);
@@ -16,19 +18,22 @@ function Provider({ children }) {
         };
     }, []);
 
-    const fetchRaces = async () => {
-        try {
-            const response = await axios.get("https://api.neds.com.au/rest/v1/racing/?method=nextraces&count=10");
-            setRaces(response.data.data);
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    useEffect(() => {
+        (async () => {
+            try {
+                const response = await axios.get("https://api.neds.com.au/rest/v1/racing/?method=nextraces&count=10");
+                setRaces(response.data.data);
+                setRefetch(false)
+            } catch (error) {
+                console.log(error);
+            }
+        })();
+    }, [refetch])
 
     const valuesToShare = {
-        fetchRaces,
         races, 
-        date
+        date,
+        refetchRaces
     }
 
     return <RacesContext.Provider value={valuesToShare}>

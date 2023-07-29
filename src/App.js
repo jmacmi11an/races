@@ -1,16 +1,13 @@
-import { useEffect, useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import RacesList from './components/RacesList';
 import Dropdown from './components/Dropdown';
 import RacesContext from './context/races';
 import "./styles/App.css";
 
 function App() {
-  const { fetchRaces, date } = useContext(RacesContext);
+  const { date } = useContext(RacesContext);
   const [raceType, setRaceType] = useState('all');
 
-  useEffect(() => {
-    fetchRaces()
-  }, [fetchRaces]);
 
   const handleSelect = (value) => setRaceType(value);
 

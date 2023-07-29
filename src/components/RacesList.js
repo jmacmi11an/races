@@ -1,9 +1,9 @@
 import RaceItem from "./RaceItem";
-import { useContext, memo } from "react";
+import { useContext } from "react";
 import RacesContext from "../context/races";
 
-const RacesList = memo(({ raceType }) => {
-  const { races, date } = useContext(RacesContext);
+const RacesList = (({ raceType }) => {
+  const { races, date, refetchRaces } = useContext(RacesContext);
   const { race_summaries, next_to_go_ids } = races;
 
   const checkRaceType = (raceType) => {
@@ -25,21 +25,24 @@ const RacesList = memo(({ raceType }) => {
     );
   });
 
+  if (filteredRaceIds && filteredRaceIds.length < 10) refetchRaces()
+
   const racesToShow = race_summaries && filteredRaceIds
-    .slice(0, 5)
     .map((raceId) => {
       const race = race_summaries[raceId];
-      const { meeting_name, race_number, advertised_start } = race;
+      const { meeting_name, race_name, advertised_start } = race;
       return (
         <RaceItem
           key={raceId}
           meetingName={meeting_name}
-          raceNumber={race_number}
+          raceName={race_name}
           startingTime={Math.floor(advertised_start.seconds - date.getTime() / 1000)}
         />
       );
-    });
-
+    })
+    // ADD THIS FOR PRODUCTION
+    // .slice(0, 5);
+    
   return racesToShow;
 });
 
