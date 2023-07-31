@@ -1,20 +1,17 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import RacesList from './components/RacesList';
 import Dropdown from './components/Dropdown';
-import RacesContext from './context/races';
+import Countdown from './components/Countdown';
 import "./styles/App.css";
 
 function App() {
-  const { date } = useContext(RacesContext);
   const [raceType, setRaceType] = useState('all');
-
-
   const handleSelect = (value) => setRaceType(value);
 
   return (
     <div className='container'>
       <h1 className='title'>Next Five Races</h1>
-      <h3 className='countdown'>{date.toLocaleTimeString()}</h3>
+      <Countdown/>
       <Dropdown onChange={handleSelect} raceType={raceType}/>
       <RacesList className="races-list" raceType={raceType}/>
     </div>

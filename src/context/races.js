@@ -1,42 +1,25 @@
 import { createContext, useState, useEffect } from "react";
+import useRefreshTime from "../hooks/useRefreshTime";
 import axios from 'axios';
 
 const RacesContext = createContext();
 
 function Provider({ children }) {
     const [races, setRaces] = useState([]);
-    const [refetch, setRefetch] = useState(false);
-    const [date, setDate] = useState(new Date());
-
-    const refreshTime = () => setDate(new Date());
-    const refetchRaces = () => setRefetch(true);
-
-    useEffect(() => {
-        const timerId = setInterval(refreshTime, 1000);
-        return () => {
-        clearInterval(timerId);
-        };
-    }, []);
+    const currentMinute = useRefreshTime(60000)
 
     useEffect(() => {
         (async () => {
             try {
                 const response = await axios.get("https://api.neds.com.au/rest/v1/racing/?method=nextraces&count=10");
                 setRaces(response.data.data);
-                setRefetch(false)
             } catch (error) {
                 console.log(error);
             }
         })();
-    }, [refetch])
+    }, [currentMinute])
 
-    const valuesToShare = {
-        races, 
-        date,
-        refetchRaces
-    }
-
-    return <RacesContext.Provider value={valuesToShare}>
+    return <RacesContext.Provider value={{races}}>
         {children}
     </RacesContext.Provider>
 }
