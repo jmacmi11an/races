@@ -11,7 +11,7 @@ function Provider({ children }) {
     useEffect(() => {
         (async () => {
             try {
-                const response = await axios.get("https://api.neds.com.au/rest/v1/racing/?method=nextraces&count=10");
+                const response = await axios.get("https://api.neds.com.au/rest/v1/racing/?method=nextraces&count=30");
                 setRaces(response.data.data);
             } catch (error) {
                 console.log(error);

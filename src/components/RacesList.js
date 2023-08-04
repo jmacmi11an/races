@@ -26,22 +26,34 @@ const RacesList = (({ raceType }) => {
         checkRaceType(raceType) === race.category_id)
     );
   });
-
+  
   const racesToShow = race_summaries && filteredRaceIds
-    .map((raceId) => {
-      const race = race_summaries[raceId];
-      const { meeting_name, race_name, advertised_start } = race;
-      return (
-        <RaceItem
-          key={raceId}
-          meetingName={meeting_name}
-          raceName={race_name}
-          startingTime={Math.floor(advertised_start.seconds - currentSecond.getTime() / 1000)}
-        />
-      );
-    })
-    .slice(0, 5);
-    
+  .map((raceId) => {
+    const { meeting_name, race_name, advertised_start } = race_summaries[raceId];
+    return {
+      raceId,
+      meetingName: meeting_name,
+      raceName: race_name,
+      startingTime: Math.floor(advertised_start.seconds - currentSecond.getTime() / 1000),
+    };
+  })
+  .sort((raceA, raceB) =>
+    raceA.startingTime !== raceB.startingTime
+      ? raceA.startingTime - raceB.startingTime // Sort by advertised_start first
+      : raceA.meetingName.localeCompare(raceB.meetingName) // If advertised_start is the same, sort alphabetically by meeting_name
+  )
+  .slice(0, 5)
+  .map(({ raceId, meetingName, raceName, startingTime }) => (
+    <RaceItem
+      key={raceId}
+      meetingName={meetingName}
+      raceName={raceName}
+      startingTime={startingTime}
+    />
+  ));
+
+
+    console.log(racesToShow)
   return racesToShow;
 });
 
